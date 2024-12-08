@@ -13,11 +13,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class EtudiantController extends AbstractController
 {
-    #[Route('/admin/etudiant/new', name: 'app_admin_etudiant_new')]
-    public function nouvelEtudiant(Request $request, EntityManagerInterface $manager): Response
+
+    #[Route('admin/etudiant', name: 'app_admin_etudiant_nouveletudiant',methods: ['GET', 'POST'])]
+    #[Route('admin/{id}/edit', name: 'app_admin_etudiant_edit', requirements: ['id'=>'\d+', '_method'=>'\w+'], methods: ['GET', 'POST'])]
+    public function nouvelEtudiant(Request $request, EntityManagerInterface $manager, ?Etudiant $etudiant): Response
     {
 
-        $etudiant = new Etudiant();
+        $etudiant ??= new Etudiant();
+
         $form = $this->createForm(EtudiantType::class, $etudiant);
 
         $form->handleRequest($request);
