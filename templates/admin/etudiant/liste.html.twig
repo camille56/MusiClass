@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello listeController!{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Liste des Étudiants</h1>
+        <div>
+            <ul>
+            {% for etudiant in etudiants %}
+                <div>
+                    {{ etudiant.nom }}
+                    {{ etudiant.prenom }}
+                    {{ etudiant.id }}
+                <p><a href="{{ path('app_admin_etudiant_detailEtudiant',{id:etudiant.id}) }}">Détails</a></p>
+                </div>
+            {% else %}
+                <li>
+                    Aucun étudiants enregistrés
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

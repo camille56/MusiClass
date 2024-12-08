@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Étudiant{% endblock %}
+
+{% block body %}
+<section>
+    <h1>Nouvel Étudiant</h1>
+    <div>
+    {{ form_start(form) }}
+    {{ form_row(form.nom, {label:'Nom'}) }}
+    {{ form_row(form.prenom, {label:'Prénom'}) }}
+        {{ form_row(form.email,{label:'Email'}) }}
+    {{ form_row(form.login,{label:'Login'}) }}
+    {{ form_row(form.password,{label:'Mot de Passe'}) }}
+    {{ form_row(form.commentaire,{label:'Commentaire'}) }}
+    {{ form_row(form.role,{label:'Role'}) }}
+{#    {{ form_row(form.formation,{label:'formation'}) }}#}
+        <button type="submit">Envoyer</button>
+    {{ form_end(form) }}
+    </div>
+    <div>
+        <p><a href="{{ path('app_admin_etudiant_liste') }}">Liste des étudiants</a></p>
+    </div>
+</section>
+{% endblock %}

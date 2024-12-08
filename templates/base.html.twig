@@ -12,6 +12,30 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block header %}
+            <nav class="navbar">
+                <div class="container">
+                    <a href="#" class="logo"><button>MusiClass</button></a>
+                    <ul>
+                        <li><button><a href="#">Se connecter</a></button></li>
+                        <li><button><a href="#">Visiteurs</a></button></li>
+                    </ul>
+                </div>
+            </nav>
+        {% endblock %}
+        <main>
+            {% block body %}
+            {% endblock %}
+        </main>
+        {% block footer %}
+            <div class="footer-container">
+                <p>&copy; 2024 MusiClass. Tous droits réservés.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                    <li><a href="#">Nous contacter</a></li>
+                </ul>
+            </div>
+        {% endblock %}
     </body>
 </html>

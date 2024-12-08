@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello indexController!{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Bienvenue dans l'administration</h1>
+        <div>
+            <h2>Vos accès</h2>
+            <ul>
+                <li><a href="{{ path('app_admin_etudiant_new') }}">Création d'élèves</a></li>
+                <li><a href="{{ path('app_admin_etudiant_liste') }}">Liste des élèves</a></li>
+                <li><a href="#">Création d'un cours</a></li>
+                <li><a href="#">Créations d'une formation</a></li>
+                <li><a href="#">Les formations</a></li>
+            </ul>
+        </div>
+    </section>
+{% endblock %}
