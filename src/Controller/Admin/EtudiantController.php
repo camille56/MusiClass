@@ -31,7 +31,7 @@ class EtudiantController extends AbstractController
             $manager->persist($etudiant);
             $manager->flush();
 
-            return $this->redirectToRoute('app_admin_etudiant_new');
+            return $this->redirectToRoute('app_admin_etudiant_nouveletudiant');
         }
 
         return $this->render('admin/etudiant/new.html.twig', [

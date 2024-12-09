@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        <h1>Nouvel Étudiant</h1>
+        <div>
+            {{ form_start(form) }}
+            {{ form_row(form.nom, {label:'Nom de la vidéo'}) }}
+            {{ form_row(form.titre, {label:'Titre de la vidéo'}) }}
+            {{ form_row(form.video, {label:'Vidéo'}) }}
+            {{ form_row(form.texte, {label:'Texte explicatif'}) }}
+            <button type="submit">Envoyer</button>
+            {{ form_end(form) }}
+        </div>
+        <div>
+{#            <p><a href="{{ path('app_admin_cours_liste') }}">Liste des cours</a></p>#}
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
