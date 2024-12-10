@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello listeController!{% endblock %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        <h1>Liste des Étudiants</h1>
+        <div>
+            <ul>
+                {% for formation in formations %}
+                    <div>
+                        {{ formation.nom }}
+
+{#                        <p><a href="{{ path('app_admin_etudiant_detailEtudiant',{id:etudiant.id}) }}">Détails</a></p>#}
+                    </div>
+                {% else %}
+                    <li>
+                        Aucun étudiants enregistrés
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

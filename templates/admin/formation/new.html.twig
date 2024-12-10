@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel Étudiant{% endblock %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        <h1>Nouvel Étudiant</h1>
+        <div>
+            {{ form_start(form) }}
+            {{ form_row(form.nom, {label:'Nom'}) }}
+            {{ form_row(form.image, {label:'image'}) }}
+            {{ form_row(form.public, {label:'statut public'}) }}
+            {{ form_row(form.niveau, {label:'niveau'}) }}
+            {{ form_row(form.etat_publication, {label:'etat de la publication'}) }}
+
+            <button type="submit">Envoyer</button>
+            {{ form_end(form) }}
+        </div>
+        <div>
+            <p><a href="{{ path('app_admin_etudiant_liste') }}">Liste des étudiants</a></p>
+        </div>
+    </section>
+{% endblock %}
