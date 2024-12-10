@@ -2,7 +2,7 @@
 
 {% set action = app.current_route==''? 'Ajout' : 'Édition' %}
 
-{% block title %}{{ action}} d'un Étudiant{% endblock %}
+{% block title %}{{ action }} d'un Étudiant{% endblock %}
 
 {% block body %}
     <section>
@@ -12,22 +12,22 @@
     </section>
     <section>
         {% if etudiant %}
-        <h1>{{ etudiant.nom }} {{ etudiant.prenom }}</h1>
-        <div>
-            <h3>Détails des informations</h3>
-            <p>{{ etudiant.nom }} {{ etudiant.prenom }}</p>
-            <p>Role:{{ etudiant.role.value }}</p>
-            <p>Date d'inscription : {{ etudiant.dateInscription |date('d M Y')  }}</p>
-            <p>Contact: {{ etudiant.email }}</p>
-        </div>
+            <h1>{{ etudiant.nom }} {{ etudiant.prenom }}</h1>
+            <div>
+                <h3>Détails des informations</h3>
+                <p>{{ etudiant.nom }} {{ etudiant.prenom }}</p>
+                <p>Role:{{ etudiant.role.value }}</p>
+                <p>Date d'inscription : {{ etudiant.dateInscription |date('d M Y') }}</p>
+                <p>Contact: {{ etudiant.email }}</p>
+            </div>
             <div>
                 <h4><a href="{{ path('app_admin_etudiant_edit', {id: etudiant.id}) }}">Édition de l'étudiant</a></h4>
             </div>
-        <div>
-            <p><a href="{{ path('app_admin_etudiant_liste') }}">Liste des étudiants</a></p>
-        </div>
+            <div>
+                <p><a href="{{ path('app_admin_etudiant_liste') }}">Liste des étudiants</a></p>
+            </div>
         {% else %}
-        <h1>Cet étudiant n'existe pas</h1>
+            <h1>Cet étudiant n'existe pas</h1>
         {% endif %}
     </section>
 {% endblock %}

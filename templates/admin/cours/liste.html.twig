@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        <h1>Liste de Cours</h1>
+        <div>
+            <ul>
+                {% for cours in listeCours %}
+                    <div>
+                        {{ cours.titre }}
+                        {{ cours.dateCreation|date }}
+                        {{ cours.texte }}
+                        {{ cours.video }}
+
+                        <p><a href="{{ path('app_admin_cours_detail',{id:cours.id}) }}">Détails</a></p>
+                    </div>
+                {% else %}
+                    <li>
+                        Aucun cours enregistré.
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+

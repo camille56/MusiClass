@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        {% if cours %}
+            <h1>{{ cours.titre }} </h1>
+            <div>
+                <h3>Détails des informations</h3>
+                <p>{{ cours.video }}</p>
+                <p>{{ cours.texte }}</p>
+                <p>Role:{{ cours.dateCreation|date}}</p>
+            </div>
+            <div>
+                <h4><a href="{{ path('app_admin_cours_editcours', {id: cours.id}) }}">Édition du cours</a></h4>
+            </div>
+            <div>
+                <p><a href="{{ path('app_admin_cours_listecours') }}">Liste des cours</a></p>
+            </div>
+        {% else %}
+            <h1>Ce cours n'existe pas</h1>
+        {% endif %}
+    </section>
+{% endblock %}
+

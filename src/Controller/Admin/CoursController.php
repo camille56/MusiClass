@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Cours;
 use App\Form\CoursType;
+use App\Repository\CoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +23,11 @@ class CoursController extends AbstractController
 //        ]);
 //    }
 
+    #[Route('/cours/{id}',name: 'app_admin_cours_editcours',requirements: ['id'=>'\d+'], methods: ['GET', 'POST'],)]
     #[Route('', name: 'app_admin_cours_newCours')]
-    public function newCours(Request $request, EntityManagerInterface $manager): Response{
+    public function newCours(Request $request, EntityManagerInterface $manager, ?Cours $cours): Response{
 
-        $cours = new Cours();
+        $cours ??= new Cours();
 
         $form = $this->createForm(CoursType::class,$cours );
         $form->handleRequest($request);
@@ -43,4 +45,19 @@ class CoursController extends AbstractController
 
         return $this->render('admin/cours/new.html.twig', ['form'=>$form]);
     }
+
+    #[Route('/liste', name: 'app_admin_cours_listecours')]
+    public function listeCours(CoursRepository $coursRepository): Response
+    {
+        $listeCours = $coursRepository->findAll();
+        return $this->render('admin/cours/liste.html.twig', ['listeCours'=>$listeCours]);
+    }
+
+    #[Route('/detail/{id}', name: 'app_admin_cours_detail', requirements: ['id'=>'\d+'], methods: ['GET', 'POST'])]
+    public function detailCours(?Cours $cours): Response{
+
+        return $this->render('admin/cours/detail.html.twig', ['cours'=>$cours]);
+    }
+
+
 }
