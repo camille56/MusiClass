@@ -9,18 +9,20 @@
         </div>
     </section>
     <section>
-        <h1>Liste des Étudiants</h1>
+        <h1>Liste des Formations</h1>
         <div>
             <ul>
                 {% for formation in formations %}
                     <div>
                         {{ formation.nom }}
+                        {{ formation.dateCreation|date }}
+                        {{ formation.etatPublication.value }}
 
 {#                        <p><a href="{{ path('app_admin_etudiant_detailEtudiant',{id:etudiant.id}) }}">Détails</a></p>#}
                     </div>
                 {% else %}
                     <li>
-                        Aucun étudiants enregistrés
+                        Aucunes formations enregistrées
                     </li>
                 {% endfor %}
             </ul>

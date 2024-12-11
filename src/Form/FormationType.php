@@ -2,10 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Cours;
 use App\Enumeration\EtatPublication;
 use App\Enumeration\Niveau;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,9 +23,14 @@ class FormationType extends AbstractType
             ->add('nom',TextType::class, [
                 'required' => true,
             ])
-//            ->add('date_creation',DateType::class)
-//            ->add('fois_suivis',IntegerType::class)
             ->add('image',TextType::class)
+            ->add('cours', EntityType::class, [
+                'class'=> Cours::class,
+                'choice_label'=> 'nom',
+                'multiple' => true,
+                'expanded' => false,
+                'required' => false,
+            ])
             ->add('public',CheckboxType::class)
             ->add('niveau',EnumType::class,
                 [
