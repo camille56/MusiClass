@@ -17,6 +17,7 @@
                         {{ formation.nom }}
                         {{ formation.dateCreation|date }}
                         {{ formation.etatPublication.value }}
+                        {{ formation.cours.count }}
 
 {#                        <p><a href="{{ path('app_admin_etudiant_detailEtudiant',{id:etudiant.id}) }}">Détails</a></p>#}
                     </div>

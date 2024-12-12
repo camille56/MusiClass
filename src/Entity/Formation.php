@@ -39,19 +39,23 @@ class Formation
     #[ORM\Column(length: 255)]
     private ?EtatPublication $etat_publication = null;
 
-    /**
-     * @var Collection<int, Cours>
-     */
-    #[ORM\OneToMany(targetEntity: Cours::class, mappedBy: 'formation')]
-    private Collection $Cours;
+
 
     #[ORM\ManyToOne(inversedBy: 'formations')]
     private ?Etudiant $Etudiant = null;
+
+    /**
+     * @var Collection<int, Cours>
+     */
+    #[ORM\OneToMany(targetEntity: Cours::class, mappedBy: 'formation', cascade: ['persist', 'remove'])]
+    private Collection $Cours;
 
     public function __construct()
     {
         $this->Cours = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -142,6 +146,20 @@ class Formation
         return $this;
     }
 
+
+
+    public function getEtudiant(): ?Etudiant
+    {
+        return $this->Etudiant;
+    }
+
+    public function setEtudiant(?Etudiant $Etudiant): static
+    {
+        $this->Etudiant = $Etudiant;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Cours>
      */
@@ -168,18 +186,6 @@ class Formation
                 $cour->setFormation(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getEtudiant(): ?Etudiant
-    {
-        return $this->Etudiant;
-    }
-
-    public function setEtudiant(?Etudiant $Etudiant): static
-    {
-        $this->Etudiant = $Etudiant;
 
         return $this;
     }

@@ -35,6 +35,8 @@ class Cours
     #[ORM\ManyToOne(inversedBy: 'Cours')]
     private ?Formation $formation = null;
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,4 +125,6 @@ class Cours
 
         return $this;
     }
+
+
 }

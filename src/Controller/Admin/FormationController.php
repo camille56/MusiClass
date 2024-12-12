@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/formation')]
 class FormationController extends AbstractController
 {
-    #[Route('', name: 'app_admin_formation')]
+    #[Route('', name: 'app_admin_formation',methods: ['GET', 'POST'])]
     public function index(Request $request,EntityManagerInterface $manager, ?Formation $formation): Response
     {
         $formation ??= new Formation();

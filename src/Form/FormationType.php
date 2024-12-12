@@ -28,8 +28,9 @@ class FormationType extends AbstractType
                 'class'=> Cours::class,
                 'choice_label'=> 'nom',
                 'multiple' => true,
-                'expanded' => false,
+                'expanded' => true,
                 'required' => false,
+                'by_reference' => false, //important pour une utilisation automatique des methodes addcour(),..
             ])
             ->add('public',CheckboxType::class)
             ->add('niveau',EnumType::class,
