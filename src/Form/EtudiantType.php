@@ -25,6 +25,9 @@ class EtudiantType extends AbstractType
             ->add('prenom', TextType::class, [
                 'required' => true,
             ])
+            ->add('telephone', TextType::class, [
+                'required' => false,
+            ])
             ->add('email', EmailType::class)
             ->add('password', TextType::class, [
                 'required' => true,

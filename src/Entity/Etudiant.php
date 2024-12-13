@@ -26,7 +26,7 @@ class Etudiant
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
 
-
+    #[Assert\Email()]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
@@ -52,6 +52,9 @@ class Etudiant
      */
     #[ORM\OneToMany(targetEntity: Formation::class, mappedBy: 'etudiant')]
     private Collection $formations;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $telephone = null;
 
     public function __construct()
     {
@@ -185,6 +188,18 @@ class Etudiant
                 $formation->setEtudiant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): static
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }
