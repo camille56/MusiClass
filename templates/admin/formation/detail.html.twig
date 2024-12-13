@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        {% if formation %}
+            <h1>{{ formation.nom }} </h1>
+            <div>
+                <h3>Détails des informations</h3>
+                <p>{{ formation.niveau.value }}</p>
+                <p>{{ formation.etatPublication.value }}</p>
+                <p>{{ formation.cours.get('titre') }}</p>
+                <p>Date de création : {{ formation.dateCreation|date('d M Y')}}</p>
+                <div>
+                    <h5>Cours suivis par :</h5>
+                    {% for etudiant in formation.etudiants %}
+                    <p>{{ etudiant.getNom() }}</p>
+                    <p>{{ etudiant.getPrenom() }}</p>
+                        {% else %}
+                        <p>Aucun étudiants ne suis cette formation.</p>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+            <div>
+                <h4><a href="{{ path('app_admin_formation_edit', {id: formation.id}) }}">Édition de la formation</a></h4>
+            </div>
+            <div>
+                <p><a href="{{ path('app_admin_listeFormation') }}">Liste des Formations</a></p>
+            </div>
+        {% else %}
+            <h1>Ce cours n'existe pas</h1>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

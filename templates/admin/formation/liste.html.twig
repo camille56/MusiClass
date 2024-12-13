@@ -19,7 +19,7 @@
                         {{ formation.etatPublication.value }}
                         {{ formation.cours.count }}
 
-{#                        <p><a href="{{ path('app_admin_etudiant_detailEtudiant',{id:etudiant.id}) }}">Détails</a></p>#}
+                        <p><a href="{{ path('app_admin_formation_show',{id:formation.id}) }}">Détails</a></p>
                     </div>
                 {% else %}
                     <li>

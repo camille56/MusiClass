@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/formation')]
 class FormationController extends AbstractController
 {
+    #[Route('/{id}/edit', name: 'app_admin_formation_edit', methods: ['GET', 'POST'])]
     #[Route('', name: 'app_admin_formation',methods: ['GET', 'POST'])]
     public function index(Request $request,EntityManagerInterface $manager, ?Formation $formation): Response
     {
@@ -46,6 +47,15 @@ class FormationController extends AbstractController
         return $this->render('admin/formation/liste.html.twig', [
             'formations'=>$formations,
         ]);
+    }
+
+    #[Route('/{id}', name: 'app_admin_formation_show', requirements: ['id'=>'\d+'], methods: ['GET'])]
+    public function detailFormation(Formation $formation): Response{
+
+        return $this->render('admin/formation/detail.html.twig', [
+            'formation'=>$formation,
+        ]);
+
     }
 
 }

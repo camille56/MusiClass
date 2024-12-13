@@ -17,7 +17,7 @@
                 <h3>Détails des informations</h3>
                 <p>{{ cours.video }}</p>
                 <p>{{ cours.texte }}</p>
-                <p>Role:{{ cours.dateCreation|date}}</p>
+                <p>Role:{{ cours.dateCreation|date('d M Y')}}</p>
             </div>
             <div>
                 <h4><a href="{{ path('app_admin_cours_editcours', {id: cours.id}) }}">Édition du cours</a></h4>

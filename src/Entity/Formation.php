@@ -41,18 +41,22 @@ class Formation
 
 
 
-    #[ORM\ManyToOne(targetEntity: Etudiant::class,inversedBy: 'formations')]
-    private ?Etudiant $etudiant = null;
-
     /**
      * @var Collection<int, Cours>
      */
     #[ORM\OneToMany(targetEntity: Cours::class, mappedBy: 'formation', cascade: ['persist', 'remove'])]
     private Collection $Cours;
 
+    /**
+     * @var Collection<int, Etudiant>
+     */
+    #[ORM\ManyToMany(targetEntity: Etudiant::class, inversedBy: 'formations')]
+    private Collection $etudiants;
+
     public function __construct()
     {
         $this->Cours = new ArrayCollection();
+        $this->etudiants = new ArrayCollection();
     }
 
 
@@ -147,19 +151,6 @@ class Formation
     }
 
 
-
-    public function getEtudiant(): ?Etudiant
-    {
-        return $this->etudiant;
-    }
-
-    public function setEtudiant(?Etudiant $etudiant): static
-    {
-        $this->etudiant = $etudiant;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Cours>
      */
@@ -186,6 +177,30 @@ class Formation
                 $cour->setFormation(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etudiant>
+     */
+    public function getEtudiants(): Collection
+    {
+        return $this->etudiants;
+    }
+
+    public function addEtudiant(Etudiant $etudiant): static
+    {
+        if (!$this->etudiants->contains($etudiant)) {
+            $this->etudiants->add($etudiant);
+        }
+
+        return $this;
+    }
+
+    public function removeEtudiant(Etudiant $etudiant): static
+    {
+        $this->etudiants->removeElement($etudiant);
 
         return $this;
     }

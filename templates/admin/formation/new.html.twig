@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvel Étudiant{% endblock %}
+{% set action = app.current_route =='app_admin_formation'? 'Création ':'Édition ' %}
+
+{% block title %}{{ action }} Formation{% endblock %}
 
 {% block body %}
     <section>
@@ -9,7 +11,7 @@
         </div>
     </section>
     <section>
-        <h1>Nouvelle Formation</h1>
+        <h1>{{ action }} Formation</h1>
         <div>
             {{ form_start(form) }}
             {{ form_row(form.nom, {label:'Nom'}) }}

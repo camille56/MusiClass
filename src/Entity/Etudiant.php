@@ -47,19 +47,22 @@ class Etudiant
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $commentaire = null;
 
-    /**
-     * @var Collection<int, Formation>
-     */
-    #[ORM\OneToMany(targetEntity: Formation::class, mappedBy: 'etudiant')]
-    private Collection $formations;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $telephone = null;
+
+    /**
+     * @var Collection<int, Formation>
+     */
+    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'etudiants')]
+    private Collection $formations;
 
     public function __construct()
     {
         $this->formations = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -162,6 +165,21 @@ class Etudiant
         return $this;
     }
 
+
+
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): static
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Formation>
      */
@@ -174,7 +192,7 @@ class Etudiant
     {
         if (!$this->formations->contains($formation)) {
             $this->formations->add($formation);
-            $formation->setEtudiant($this);
+            $formation->addEtudiant($this);
         }
 
         return $this;
@@ -183,23 +201,8 @@ class Etudiant
     public function removeFormation(Formation $formation): static
     {
         if ($this->formations->removeElement($formation)) {
-            // set the owning side to null (unless already changed)
-            if ($formation->getEtudiant() === $this) {
-                $formation->setEtudiant(null);
-            }
+            $formation->removeEtudiant($this);
         }
-
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(?string $telephone): static
-    {
-        $this->telephone = $telephone;
 
         return $this;
     }

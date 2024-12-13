@@ -17,7 +17,7 @@
                 {% for cours in listeCours %}
                     <div>
                         {{ cours.titre }}
-                        {{ cours.dateCreation|date }}
+                        {{ cours.dateCreation|date('d M Y') }}
                         {{ cours.texte }}
                         {{ cours.video }}
 
