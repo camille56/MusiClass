@@ -7,6 +7,7 @@ use App\Enumeration\Role;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,15 +35,20 @@ class EtudiantType extends AbstractType
             ->add('commentaire', TextareaType::class,[
                 'required' => false,
             ])
-//            ->add('date_inscription', DateType::class)
-            ->add('role', \Symfony\Component\Form\Extension\Core\Type\EnumType::class,
+
+            ->add('role', EnumType::class,
                 [
                     'class' => Role::class,
                 ])
-//            ->add('Formation', EntityType::class,[
-//                    'class' => Formation::class,
-//                    'choice_label' => 'nom',
-//            ])
+            ->add('formations', EntityType::class,[
+                    'class' => Formation::class,
+                    'choice_label' => 'nom',
+                    'by_reference' => false,
+                    'multiple' => true,
+                'required' => false,
+                'expanded' => true,
+
+            ])
         ;
     }
 

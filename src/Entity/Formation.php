@@ -41,8 +41,8 @@ class Formation
 
 
 
-    #[ORM\ManyToOne(inversedBy: 'formations')]
-    private ?Etudiant $Etudiant = null;
+    #[ORM\ManyToOne(targetEntity: Etudiant::class,inversedBy: 'formations')]
+    private ?Etudiant $etudiant = null;
 
     /**
      * @var Collection<int, Cours>
@@ -150,12 +150,12 @@ class Formation
 
     public function getEtudiant(): ?Etudiant
     {
-        return $this->Etudiant;
+        return $this->etudiant;
     }
 
-    public function setEtudiant(?Etudiant $Etudiant): static
+    public function setEtudiant(?Etudiant $etudiant): static
     {
-        $this->Etudiant = $Etudiant;
+        $this->etudiant = $etudiant;
 
         return $this;
     }
