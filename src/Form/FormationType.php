@@ -26,7 +26,7 @@ class FormationType extends AbstractType
             ->add('image',TextType::class)
             ->add('cours', EntityType::class, [
                 'class'=> Cours::class,
-                'choice_label'=> 'nom',
+                'choice_label'=> 'titre',
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,

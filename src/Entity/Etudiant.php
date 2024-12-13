@@ -50,7 +50,7 @@ class Etudiant
     /**
      * @var Collection<int, Formation>
      */
-    #[ORM\OneToMany(targetEntity: Formation::class, mappedBy: 'Etudiant')]
+    #[ORM\OneToMany(targetEntity: Formation::class, mappedBy: 'etudiant')]
     private Collection $formations;
 
     public function __construct()
