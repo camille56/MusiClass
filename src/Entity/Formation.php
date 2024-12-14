@@ -53,10 +53,17 @@ class Formation
     #[ORM\ManyToMany(targetEntity: Etudiant::class, inversedBy: 'formations')]
     private Collection $etudiants;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'formations')]
+    private Collection $users;
+
     public function __construct()
     {
         $this->Cours = new ArrayCollection();
         $this->etudiants = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 
@@ -201,6 +208,33 @@ class Formation
     public function removeEtudiant(Etudiant $etudiant): static
     {
         $this->etudiants->removeElement($etudiant);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFormation($this);
+        }
 
         return $this;
     }

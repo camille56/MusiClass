@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% set action = app.current_route == "app_register" ? 'Création': 'Édition' %}
+
+{% block title %}{{ action }} d'utilisateur{% endblock %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        <h1>{{ action }} Utilisateur</h1>
+        <div>
+            {{ form_errors(registrationForm) }}
+
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.nom) }}
+            {{ form_row(registrationForm.prenom) }}
+            {{ form_row(registrationForm.telephone) }}
+            {{ form_row(registrationForm.commentaire) }}
+            {{ form_row(registrationForm.instrument) }}
+            {{ form_row(registrationForm.formations) }}
+
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+
+{#            todo: correction de la valeur invalide du password#}
+
+            <button type="submit">Envoyer</button>
+
+            {{ form_end(registrationForm) }}
+        </div>
+        <div>
+            <p><a href="{{ path('app_liste_user') }}">Liste des utilisateurs</a></p>
+        </div>
+    </section>
+{% endblock %}

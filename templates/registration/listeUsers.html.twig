@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        <h1>Liste des Utilisateurs</h1>
+        <div>
+            <ul>
+                {% for user in users %}
+                    <div>
+                        {{ user.nom }}
+                        {{ user.prenom }}
+                        {{ user.telephone }}
+                        {{ user.dateInscription|date }}
+                        {{ user.id }}
+                        <p><a href="{{ path('app_register_edit',{id:user.id}) }}">Détails</a></p>
+                    </div>
+                {% else %}
+                    <li>
+                        Aucun utilisateurs enregistrés
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
