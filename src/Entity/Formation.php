@@ -47,11 +47,7 @@ class Formation
     #[ORM\OneToMany(targetEntity: Cours::class, mappedBy: 'formation', cascade: ['persist', 'remove'])]
     private Collection $Cours;
 
-    /**
-     * @var Collection<int, Etudiant>
-     */
-    #[ORM\ManyToMany(targetEntity: Etudiant::class, inversedBy: 'formations')]
-    private Collection $etudiants;
+
 
     /**
      * @var Collection<int, User>
@@ -62,7 +58,6 @@ class Formation
     public function __construct()
     {
         $this->Cours = new ArrayCollection();
-        $this->etudiants = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
