@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Enumeration\EtatPublication;
 use App\Enumeration\Niveau;
 use App\Repository\FormationRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -22,7 +23,7 @@ class Formation
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $date_creation = null;
+    private ?DateTimeImmutable $date_creation = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $fois_suivie = null;
@@ -40,13 +41,11 @@ class Formation
     private ?EtatPublication $etat_publication = null;
 
 
-
     /**
      * @var Collection<int, Cours>
      */
     #[ORM\OneToMany(targetEntity: Cours::class, mappedBy: 'formation', cascade: ['persist', 'remove'])]
     private Collection $Cours;
-
 
 
     /**
@@ -60,7 +59,6 @@ class Formation
         $this->Cours = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
-
 
 
     public function getId(): ?int
@@ -80,12 +78,12 @@ class Formation
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeImmutable
+    public function getDateCreation(): ?DateTimeImmutable
     {
         return $this->date_creation;
     }
 
-    public function setDateCreation(\DateTimeImmutable $date_creation): static
+    public function setDateCreation(DateTimeImmutable $date_creation): static
     {
         $this->date_creation = $date_creation;
 
@@ -179,30 +177,6 @@ class Formation
                 $cour->setFormation(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Etudiant>
-     */
-    public function getEtudiants(): Collection
-    {
-        return $this->etudiants;
-    }
-
-    public function addEtudiant(Etudiant $etudiant): static
-    {
-        if (!$this->etudiants->contains($etudiant)) {
-            $this->etudiants->add($etudiant);
-        }
-
-        return $this;
-    }
-
-    public function removeEtudiant(Etudiant $etudiant): static
-    {
-        $this->etudiants->removeElement($etudiant);
 
         return $this;
     }
