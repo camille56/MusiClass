@@ -24,11 +24,8 @@
             {{ form_row(registrationForm.formations) }}
 
             {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }}
+            {{ form_row(registrationForm.password) }}
 
-{#            todo: correction de la valeur invalide du password#}
 
             <button type="submit">Envoyer</button>
 
