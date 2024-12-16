@@ -17,9 +17,9 @@
                 <p>Date de création : {{ formation.dateCreation|date('d M Y')}}</p>
                 <div>
                     <h5>Cours suivis par :</h5>
-                    {% for etudiant in formation.etudiants %}
-                    <p>{{ etudiant.getNom() }}</p>
-                    <p>{{ etudiant.getPrenom() }}</p>
+                    {% for user in formation.users %}
+                    <p>{{ user.getNom() }}</p>
+                    <p>{{ user.getPrenom() }}</p>
                         {% else %}
                         <p>Aucun étudiants ne suis cette formation.</p>
                     {% endfor %}

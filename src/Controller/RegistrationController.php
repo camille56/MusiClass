@@ -16,15 +16,8 @@ class RegistrationController extends AbstractController
 {
     #[Route('/{id}/edit', name: 'app_register_edit', methods: ['GET', 'POST'])]
     #[Route('', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ?User $user): Response
+    public function register(Request $request, EntityManagerInterface $entityManager, ?User $user): Response
     {
-//        //Création de la variable à transmettre au template pour obtenir la route (la finalité étant d'afficher ou non les champs mail et mdp dans le formulaire).
-//        $currentRoute=null;
-//        if (!$user){
-//            $currentRoute="app_register";
-//        }else{
-//            $currentRoute="app_register_edit";
-//        }
 
         $user ??= new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -35,22 +28,15 @@ class RegistrationController extends AbstractController
             $dateInscription = new \DateTimeImmutable();
             $user->setDateInscription($dateInscription);
 
-            /** @var string $plainPassword */
-            $plainPassword = $form->get('plainPassword')->getData();
-
-            // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-
             $entityManager->persist($user);
             $entityManager->flush();
 
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_register');
         }
 
         return $this->render('registration/register.html.twig', [
-//            'current_route' => $currentRoute,
             'registrationForm' => $form,
         ]);
     }
