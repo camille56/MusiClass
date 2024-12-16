@@ -21,7 +21,7 @@ security:
                 check_path: app_login
                 enable_csrf: true
             logout:
-                path: app_logout
+                path: app_index
                 # where to redirect after logout
                 # target: app_any_route
 
