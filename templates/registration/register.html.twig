@@ -24,8 +24,10 @@
             {{ form_row(registrationForm.formations) }}
 
             {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.password) }}
-
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.roles) }}
 
             <button type="submit">Envoyer</button>
 

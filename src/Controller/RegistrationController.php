@@ -16,7 +16,7 @@ class RegistrationController extends AbstractController
 {
     #[Route('/{id}/edit', name: 'app_register_edit', methods: ['GET', 'POST'])]
     #[Route('', name: 'app_register')]
-    public function register(Request $request, EntityManagerInterface $entityManager, ?User $user): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, ?User $user): Response
     {
 
         $user ??= new User();
@@ -27,6 +27,12 @@ class RegistrationController extends AbstractController
 
             $dateInscription = new \DateTimeImmutable();
             $user->setDateInscription($dateInscription);
+
+            /** @var string $plainPassword */
+            $plainPassword = $form->get('plainPassword')->getData();
+
+            // encode the plain password
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $entityManager->persist($user);
             $entityManager->flush();
