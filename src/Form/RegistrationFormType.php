@@ -61,7 +61,8 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Roles',
                 'expanded' => true, // Cases à cocher
                 'multiple' => true, // Plusieurs choix possibles
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

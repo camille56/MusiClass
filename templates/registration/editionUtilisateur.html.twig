@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% set action = app.current_route == "app_register" ? 'Création': 'Édition' %}
+
+{% block title %}{{ action }} d'utilisateur{% endblock %}
+
+{% block body %}
+    <section>
+        <div>
+            <a href="{{ path('app_admin_index') }}">Retour au menu principal</a>
+        </div>
+    </section>
+    <section>
+        <h1>{{ action }} Utilisateur</h1>
+        <div>
+            {{ form_errors(form) }}
+
+            {{ form_start(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.telephone) }}
+            {{ form_row(form.commentaire) }}
+            {{ form_row(form.instrument) }}
+            {{ form_row(form.formations) }}
+
+            <button type="submit">Envoyer</button>
+
+            {{ form_end(form) }}
+        </div>
+        <div>
+            <a href="{{ path('app_register_edit_mdp',{id:user_id})}}">Modification password</a>
+        </div>
+        <div>
+            <p><a href="{{ path('app_liste_user') }}">Liste des utilisateurs</a></p>
+        </div>
+    </section>
+{% endblock %}
