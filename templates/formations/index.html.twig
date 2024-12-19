@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos formations{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Formations</h1>
+        <div>
+            <h2>Bienvenue {{ user.nom }}</h2>
+            <h2>Vous avez accès à ces formations :</h2>
+            <ul>
+                {% for formation in listeFormation %}
+                    <li><a href="{{ path('app_formations_detailformations',{id:formation.id}) }}">{{ formation.nom }}</a></li>
+                {% else %}
+                    <li>Aucunes formations ne sont disponibles pour le moment</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

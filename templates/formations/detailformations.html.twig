@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Formations</h1>
+        <div>
+            <h2>{{ formation.nom }}</h2>
+            <h3>Liste des cours :</h3>
+            <ul>
+                {% for cours in listeCours %}
+                    <li><a href="{{ path('app_cours_detailcours',{id:cours.id}) }}">{{ cours.titre }}</a></li>
+                {% else %}
+                    <li>Ce cours n'est pas disponible pour le moment</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}
+
+
+
