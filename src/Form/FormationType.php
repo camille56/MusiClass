@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +22,7 @@ class FormationType extends AbstractType
             ->add('nom',TextType::class, [
                 'required' => true,
             ])
-            ->add('image',TextType::class)
+            ->add('image',FileType::class)
             ->add('cours', EntityType::class, [
                 'class'=> Cours::class,
                 'choice_label'=> 'titre',

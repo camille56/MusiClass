@@ -12,7 +12,7 @@
             <p>{{ cours.dateCreation|date('d M Y') }}</p>
             <p>{{ cours.texte }}</p>
             <p>nom de la vidéo : {{ cours.video }}</p>
-            <video src="{{ asset('public/uploads/videos/' ~ cours.video) }}"  controls></video>
+            <video src="/uploads/{{ cours.video }}"  controls></video>
         </div>
     </section>
 {% endblock %}

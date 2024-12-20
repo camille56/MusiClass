@@ -9,6 +9,7 @@
         <h1>Formations</h1>
         <div>
             <h2>{{ formation.nom }}</h2>
+            <img src="/uploads/{{ formation.image }}" alt="image illustrant la formation, portant le nom {{ formation.image }}">
             <h3>Liste des cours :</h3>
             <ul>
                 {% for cours in listeCours %}

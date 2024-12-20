@@ -70,7 +70,7 @@ class CoursController extends AbstractController
                     $cours->setVideo($nomVideo);
 
                 }catch(FileException $e){
-                    throw new Exception('Erreur lors du téléchargement de la vidéo.');
+                    throw new Exception('Erreur lors du téléchargement de la vidéo. '.$e->getMessage());
                 }
 
             }
