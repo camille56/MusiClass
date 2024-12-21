@@ -32,7 +32,13 @@ class FormationsController extends AbstractController
     #[Route('/{id}', name: 'app_formations_detailformations', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function detailFormations(Formation $formation): Response
     {
-            $listeCours = $formation->getCours();
+        //sécurité
+        if ($formation) {
+            $this->denyAccessUnlessGranted('ACCESS_FORMATION', $formation);
+        }
+
+        $listeCours = $formation->getCours();
+
 
         return $this->render('formations/detailformations.html.twig', [
             'formation' => $formation,
