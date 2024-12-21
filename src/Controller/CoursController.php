@@ -20,7 +20,10 @@ class CoursController extends AbstractController
     #[Route('detail/{id}', name: 'app_cours_detailcours',requirements: ['id' => '\d+'], methods: ['GET'])]
     public function detailCours(Cours $cours): Response
     {
-
+        //sécurité
+        if ($cours) {
+            $this->denyAccessUnlessGranted('ACCESS_COURS', $cours);
+        }
 
         return $this->render('cours/detailCours.html.twig', [
             'cours' => $cours,
