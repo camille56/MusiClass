@@ -17,7 +17,11 @@
                 <div class="container">
                     <a href="{{ path('app_index') }}" class="logo"><button>MusiClass</button></a>
                     <ul>
-                        <li><button><a href="{{ path('app_login') }}">Se connecter</a></button></li>
+                        {% if app.user %}
+                            <li><button><a href="{{ path('app_formations') }}">Accès formations</a></button></li>
+                        {% else %}
+                            <li><button><a href="{{ path('app_login') }}">Se connecter</a></button></li>
+                        {% endif %}
                         <li><button><a href="#">Visiteurs</a></button></li>
                     </ul>
                 </div>
