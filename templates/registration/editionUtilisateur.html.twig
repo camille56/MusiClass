@@ -31,6 +31,11 @@
             <a href="{{ path('app_register_edit_mdp',{id:user_id})}}">Modification password</a>
         </div>
         <div>
+            <form action="{{ path('app_register_delete',{id:user_id}) }}" method="post">
+                <button type="submit" onclick="return confirm('ètes vous sur de vouloir supprimer cet utilisateurs')">Supprimer</button>
+            </form>
+        </div>
+        <div>
             <p><a href="{{ path('app_liste_user') }}">Liste des utilisateurs</a></p>
         </div>
     </section>

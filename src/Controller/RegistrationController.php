@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Form\UserEditionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -80,4 +81,22 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/delete', name: 'app_register_delete', methods: ['POST'])]
+    public function SuppressionUser(Request $request, EntityManagerInterface $entityManager, User $user):RedirectResponse
+    {
+        if (!$user) {
+            $this->addFlash('error', 'Utilisateur non trouvé!');
+            return $this->redirectToRoute('app_liste_user');
+        }
+
+        // Supprimer l'utilisateur
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        // Ajouter un message flash de succès
+        $this->addFlash('success', 'Utilisateur supprimé avec succès!');
+
+        // Rediriger vers la liste des utilisateurs ou autre page
+        return $this->redirectToRoute('app_liste_user');
+    }
 }
