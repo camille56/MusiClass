@@ -24,6 +24,16 @@
             <button type="submit">Envoyer</button>
             {{ form_end(form) }}
         </div>
+        {% if app.current_route =='app_admin_cours_editcours' %}
+            <div>
+                <form action="{{ path('app_admin_cours_delete',{id:formation.id}) }}" method="post">
+                    <button type="submit"
+                            onclick="return confirm('Ètes-vous sur de vouloir supprimer cette formation ? Attention celà supprimera les cours qu\'elle contient.')">
+                        Supprimer
+                    </button>
+                </form>
+            </div>
+        {% endif %}
         <div>
             <p><a href="{{ path('app_admin_listeFormation') }}">Liste des Formations</a></p>
         </div>

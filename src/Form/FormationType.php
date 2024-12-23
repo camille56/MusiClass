@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FormationType extends AbstractType
@@ -22,7 +23,21 @@ class FormationType extends AbstractType
             ->add('nom',TextType::class, [
                 'required' => true,
             ])
-            ->add('image',FileType::class)
+            ->add('image',FileType::class,[
+                'required' => false, // L'image n'est pas obligatoire
+                'mapped' => false, // Cela indique que ce champ ne doit pas être mappé automatiquement sur l'entité
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M', // Limite de taille, par exemple
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF)',
+                    ])
+                ],
+            ])
             ->add('cours', EntityType::class, [
                 'class'=> Cours::class,
                 'choice_label'=> 'titre',

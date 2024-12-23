@@ -108,7 +108,7 @@ class CoursController extends AbstractController
     {
         if (!$cours) {
             $this->addFlash('error', 'Cours non trouvé!');
-            return $this->redirectToRoute('app_liste_user');
+            return $this->redirectToRoute('app_admin_cours_listecours');
         }
 
         $entityManager->remove($cours);
