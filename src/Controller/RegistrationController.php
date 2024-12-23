@@ -82,7 +82,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_register_delete', methods: ['POST'])]
-    public function SuppressionUser(Request $request, EntityManagerInterface $entityManager, User $user):RedirectResponse
+    public function SuppressionUser(EntityManagerInterface $entityManager, User $user):RedirectResponse
     {
         if (!$user) {
             $this->addFlash('error', 'Utilisateur non trouvé!');

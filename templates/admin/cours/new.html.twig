@@ -19,7 +19,9 @@
             {{ form_end(form) }}
         </div>
         <div>
-{#            <p><a href="{{ path('app_admin_cours_liste') }}">Liste des cours</a></p>#}
+            <form action="{{ path('app_admin_cours_delete',{id:cours.id}) }}" method="post">
+                <button type="submit" onclick="return confirm('Ètes-vous sur de vouloir supprimer ce cours ?')">Supprimer</button>
+            </form>
         </div>
     </section>
 {% endblock %}

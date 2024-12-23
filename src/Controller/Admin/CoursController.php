@@ -3,12 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Cours;
+use App\Entity\User;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,7 +25,7 @@ class CoursController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/cours/{id}',name: 'app_admin_cours_editcours',requirements: ['id'=>'\d+'], methods: ['GET', 'POST'],)]
+    #[Route('/{id}',name: 'app_admin_cours_editcours',requirements: ['id'=>'\d+'], methods: ['GET', 'POST'],)]
     #[Route('', name: 'app_admin_cours_newCours')]
     public function newCours(Request $request, EntityManagerInterface $manager, ?Cours $cours,SluggerInterface $slugger): Response{
 
@@ -82,7 +84,10 @@ class CoursController extends AbstractController
             return $this->redirectToRoute('app_admin_cours_newCours');
         }
 
-        return $this->render('admin/cours/new.html.twig', ['form'=>$form]);
+        return $this->render('admin/cours/new.html.twig', [
+            'form'=>$form,
+            'cours'=>$cours,
+        ]);
     }
 
     #[Route('/liste', name: 'app_admin_cours_listecours')]
@@ -96,6 +101,22 @@ class CoursController extends AbstractController
     public function detailCours(?Cours $cours): Response{
 
         return $this->render('admin/cours/detail.html.twig', ['cours'=>$cours]);
+    }
+
+    #[Route('/{id}/delete', name: 'app_admin_cours_delete', methods: ['POST'])]
+    public function SuppressionUser(EntityManagerInterface $entityManager, Cours $cours):RedirectResponse
+    {
+        if (!$cours) {
+            $this->addFlash('error', 'Cours non trouvé!');
+            return $this->redirectToRoute('app_liste_user');
+        }
+
+        $entityManager->remove($cours);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Cours supprimé avec succès!');
+
+        return $this->redirectToRoute('app_admin_cours_listecours');
     }
 
 
