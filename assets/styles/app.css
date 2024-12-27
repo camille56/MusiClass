@@ -4,6 +4,13 @@ body, h1, p, ul, a {
     padding: 0;
     box-sizing: border-box;
 }
+/*admin*/
+.miniature {
+    width: 150px;
+    height: auto;
+}
+
+
 
 body {
     background-color: white;
@@ -130,3 +137,4 @@ section{
     }
 
 }
+

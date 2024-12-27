@@ -97,7 +97,7 @@ class FormationController extends AbstractController
             }
         }
 
-        //todo Verifier les créations et les edition de formation dans l'admin. afficher l image is elle existe?
+        //todo Verifier les créations et les edition de formation dans l'admin. afficher l image si elle existe?
 
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
