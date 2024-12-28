@@ -15,6 +15,11 @@
         <div>
             {{ form_start(form) }}
             {{ form_row(form.nom, {label:'Nom'}) }}
+            {% if formation.image %}
+                <img class="miniature" src="/uploads/{{ formation.image }}" alt="miniature de l'image pourtant le nom: {{ formation.image }}">
+            {% else %}
+                <p>Actuellement aucune image pour cette formation</p>
+            {% endif %}
             {{ form_row(form.image, {label:'image'}) }}
             {{ form_row(form.cours, {label:'cours'}) }}
             {{ form_row(form.public, {label:'statut public'}) }}
@@ -24,6 +29,16 @@
             <button type="submit">Envoyer</button>
             {{ form_end(form) }}
         </div>
+        {% if app.current_route =='app_admin_formation_edit' %}
+            <div>
+                <form action="{{ path('app_admin_cours_delete',{id:formation.id}) }}" method="post">
+                    <button type="submit"
+                            onclick="return confirm('Ètes-vous sur de vouloir supprimer cette formation ? Attention celà supprimera les cours qu\'elle contient.')">
+                        Supprimer
+                    </button>
+                </form>
+            </div>
+        {% endif %}
         <div>
             <p><a href="{{ path('app_admin_listeFormation') }}">Liste des Formations</a></p>
         </div>

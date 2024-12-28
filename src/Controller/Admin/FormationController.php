@@ -90,12 +90,6 @@ class FormationController extends AbstractController
     {
         $formation ??= new Formation();
 
-        if ($formation->getImage()) {
-            $cheminAbsolu = $this->getParameter('dossier_uploads') . '/' . $formation->getImage();
-            if (file_exists($cheminAbsolu)) {
-                $formation->setImage(new File($cheminAbsolu));
-            }
-        }
 
         //todo Verifier les créations et les edition de formation dans l'admin. afficher l image si elle existe?
 
@@ -152,7 +146,7 @@ class FormationController extends AbstractController
 
 
 
-        return $this->render('admin/formation/new.html.twig', [
+        return $this->render('admin/formation/edit.html.twig', [
             'form'=>$form,
             'formation'=>$formation,
         ]);
