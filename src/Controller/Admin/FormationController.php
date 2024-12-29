@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Formation;
 use App\Form\FormationType;
+use App\Repository\CoursRepository;
 use App\Repository\FormationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -25,10 +26,21 @@ class FormationController extends AbstractController
      * @throws Exception
      */
     #[Route('', name: 'app_admin_formation',methods: ['GET', 'POST'])]
-    public function index(Request $request,EntityManagerInterface $manager, SluggerInterface $slugger): Response
+    public function index(Request $request,EntityManagerInterface $manager, SluggerInterface $slugger, CoursRepository $coursRepository): Response
     {
         $formation = new Formation();
-        $form = $this->createForm(FormationType::class, $formation);
+
+        //récupération des cours disponibles ou étant associé à la formation.
+        $listeCoursDisponibles=null;
+        $listeCoursDisponibles = $coursRepository->getCoursDisponibles();
+
+        // On utilise un tableau d'options pour transmettre au formulaire les cours disponibles.
+        // Le formulaire attend une entrée nommée 'listeCoursDisponibles' dans les options passées à la méthode createForm.
+        // Ces données seront ensuite utilisées pour remplir le champ 'cours' du formulaire dans le template.
+        // Ce champ 'cours' affichera les cours disponibles dans l'option 'listeCoursDisponibles'.
+        $form = $this->createForm(FormationType::class, $formation, [
+            'listeCoursDisponibles' => $listeCoursDisponibles,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -80,6 +92,8 @@ class FormationController extends AbstractController
         }
 
 
+
+
         return $this->render('admin/formation/new.html.twig', [
             'form'=>$form,
         ]);
@@ -89,9 +103,6 @@ class FormationController extends AbstractController
     public function editFormation(Request $request,EntityManagerInterface $manager, ?Formation $formation, SluggerInterface $slugger): Response
     {
         $formation ??= new Formation();
-
-
-        //todo Verifier les créations et les edition de formation dans l'admin. afficher l image si elle existe?
 
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);

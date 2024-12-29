@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Cours;
+use App\Entity\Formation;
 use App\Enumeration\EtatPublication;
 use App\Enumeration\Niveau;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -41,6 +42,7 @@ class FormationType extends AbstractType
             ->add('cours', EntityType::class, [
                 'class'=> Cours::class,
                 'choice_label'=> 'titre',
+                'choices'=> $options['listeCoursDisponibles'],
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,
@@ -61,7 +63,10 @@ class FormationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Formation::class, // Modèle de données du formulaire
+            'listeCoursDisponibles' => [], // Valeur par défaut pour l'option personnalisée
         ]);
+
+        $resolver->setAllowedTypes('listeCoursDisponibles', 'array'); // Valide que l'option est un tableau
     }
 }
