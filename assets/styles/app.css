@@ -4,12 +4,12 @@ body, h1, p, ul, a {
     padding: 0;
     box-sizing: border-box;
 }
+
 /*admin*/
 .miniature {
     width: 150px;
     height: auto;
 }
-
 
 
 body {
@@ -60,7 +60,7 @@ a {
 
 
 button {
-    width: 250px;
+    width: max-content;
     max-height: 80px;
     border: 0;
     background: transparent;
@@ -78,8 +78,8 @@ button {
 
 button::after {
     content: "";
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     background: linear-gradient(225deg, #27d86c 0%, #26caf8 50%, #c625d0 100%);
     position: absolute;
     top: -50px;
@@ -102,7 +102,11 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+
+    max-width: 800px;
+    padding: 100px;
+    border: black 1px;
+    background: rgba(255, 255, 255, 0.2);
 
     ul {
         margin: 20px 20px 40px;
@@ -113,12 +117,6 @@ section {
     }
 }
 
-section{
-    max-width: 800px;
-    padding: 100px ;
-    border: black 1px;
-    background: rgba(255, 255, 255, 0.2);
-}
 
 /*Le Footer*/
 .footer-container {
@@ -131,8 +129,9 @@ section{
         margin: auto;
         padding: 10px;
     }
-    li{
-        margin:  5px;
+
+    li {
+        margin: 5px;
 
     }
 
