@@ -31,7 +31,7 @@
         </div>
         {% if app.current_route =='app_admin_formation_edit' %}
             <div>
-                <form action="{{ path('app_admin_cours_delete',{id:formation.id}) }}" method="post">
+                <form action="{{ path('app_admin_formation_suppression',{id:formation.id}) }}" method="post">
                     <button type="submit"
                             onclick="return confirm('Ètes-vous sur de vouloir supprimer cette formation ? Attention celà supprimera les cours qu\'elle contient.')">
                         Supprimer

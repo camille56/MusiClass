@@ -100,11 +100,17 @@ class FormationController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_formation_edit', methods: ['GET', 'POST'])]
-    public function editFormation(Request $request,EntityManagerInterface $manager, ?Formation $formation, SluggerInterface $slugger): Response
+    public function editFormation(Request $request,EntityManagerInterface $manager, ?Formation $formation, SluggerInterface $slugger, CoursRepository $coursRepository): Response
     {
         $formation ??= new Formation();
 
-        $form = $this->createForm(FormationType::class, $formation);
+        //récupération des cours disponibles ou étant associé à la formation.
+        $listeCoursDisponibles=null;
+        $listeCoursDisponibles = $coursRepository->getCoursDisponibles($formation->getId());
+
+        $form = $this->createForm(FormationType::class, $formation, [
+            'listeCoursDisponibles' => $listeCoursDisponibles,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
